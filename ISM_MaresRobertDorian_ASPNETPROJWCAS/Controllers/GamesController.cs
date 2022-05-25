@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISM_MaresRobertDorian_ASPNETPROJWCAS.Data;
 using ISM_MaresRobertDorian_ASPNETPROJWCAS.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
 {
+    [Authorize]
     public class GamesController : Controller
     {
         private readonly ApplicationDbContext _context;
