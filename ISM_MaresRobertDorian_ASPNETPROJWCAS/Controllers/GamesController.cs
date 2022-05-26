@@ -21,7 +21,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             _context = context;
         }
 
-        // GET: Games
+        // GET ALL Games
         public async Task<IActionResult> Index()
         {
               return _context.Games != null ? 
@@ -29,7 +29,6 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
                           Problem("Entity set 'ApplicationDbContext.Games'  is null.");
         }
 
-        // GET: Games/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Games == null)
@@ -47,21 +46,27 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(game);
         }
 
-        // GET: Games/Create
-        [Authorize(Roles = "ADMIN_ROLE")]
+        //CREATE Game
+        //[Authorize(Roles = "ADMIN_ROLE")]
         public IActionResult Create()
         {
+            if (!User.IsInRole("ADMIN_ROLE"))
+            {
+                return Unauthorized("Acces denied! You are not an Admin!");
+            }
             return View();
         }
 
-        // POST: Games/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //CREATE Game
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMIN_ROLE")]
+        //[Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Create([Bind("Id,Name,Publisher,GameSize,ImgString,ReleaseDate")] Game game)
         {
+            if (!User.IsInRole("ADMIN_ROLE"))
+            {
+                return Unauthorized("Acces denied! You are not an Admin!");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(game);
@@ -71,10 +76,14 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(game);
         }
 
-        // GET: Games/Edit/5
-        [Authorize(Roles = "ADMIN_ROLE")]
+        //UPDATE Game
+        //[Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!User.IsInRole("ADMIN_ROLE"))
+            {
+                return Unauthorized("Acces denied! You are not an Admin!");
+            }
             if (id == null || _context.Games == null)
             {
                 return NotFound();
@@ -88,14 +97,16 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(game);
         }
 
-        // POST: Games/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //UPDATE Game
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMIN_ROLE")]
+        //[Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Publisher,GameSize,ImgString,ReleaseDate")] Game game)
         {
+            if (!User.IsInRole("ADMIN_ROLE"))
+            {
+                return Unauthorized("Acces denied! You are not an Admin!");
+            }
             if (id != game.Id)
             {
                 return NotFound();
@@ -124,10 +135,14 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(game);
         }
 
-        // GET: Games/Delete/5
-        [Authorize(Roles = "ADMIN_ROLE")]
+        //DELETE Game
+        //[Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!User.IsInRole("ADMIN_ROLE"))
+            {
+                return Unauthorized("Acces denied! You are not an Admin!");
+            }
             if (id == null || _context.Games == null)
             {
                 return NotFound();
@@ -143,12 +158,16 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(game);
         }
 
-        // POST: Games/Delete/5
+        //DELETE Game
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMIN_ROLE")]
+        //[Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!User.IsInRole("ADMIN_ROLE"))
+            {
+                return Unauthorized("Acces denied! You are not an Admin!");
+            }
             if (_context.Games == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Games'  is null.");

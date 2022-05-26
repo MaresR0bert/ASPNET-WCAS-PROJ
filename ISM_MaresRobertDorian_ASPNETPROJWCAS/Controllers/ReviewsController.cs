@@ -21,14 +21,14 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             _context = context;
         }
 
-        // GET: Reviews
+        //GET Games
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Reviews.Include(r => r.Game);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Reviews/Details/5
+        //GET Game
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Reviews == null)
@@ -47,7 +47,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Create
+        //CREATE Game
         [Authorize(Roles = "ADMIN_ROLE,REVIEWER_ROLE")]
         public IActionResult Create()
         {
@@ -55,9 +55,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View();
         }
 
-        // POST: Reviews/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //CREATE Game
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN_ROLE,REVIEWER_ROLE")]
@@ -73,7 +71,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Edit/5
+        //UPDATE Game
         [Authorize(Roles = "ADMIN_ROLE,REVIEWER_ROLE")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -91,9 +89,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //UPDATE Game
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN_ROLE,REVIEWER_ROLE")]
@@ -128,7 +124,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(review);
         }
 
-        // GET: Reviews/Delete/5
+        //DELETE Game
         [Authorize(Roles = "ADMIN_ROLE,REVIEWER_ROLE")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -148,7 +144,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
             return View(review);
         }
 
-        // POST: Reviews/Delete/5
+        //DELETE Game
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN_ROLE,REVIEWER_ROLE")]
