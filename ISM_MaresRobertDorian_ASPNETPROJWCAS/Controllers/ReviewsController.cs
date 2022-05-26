@@ -48,6 +48,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         }
 
         // GET: Reviews/Create
+        [Authorize(Roles = "ADMIN_ROLE")]
         public IActionResult Create()
         {
             ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id");
@@ -59,6 +60,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,IsPositive,GameId")] Review review)
         {
             if (ModelState.IsValid)
@@ -72,6 +74,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         }
 
         // GET: Reviews/Edit/5
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Reviews == null)
@@ -93,6 +96,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,IsPositive,GameId")] Review review)
         {
             if (id != review.Id)
@@ -125,6 +129,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         }
 
         // GET: Reviews/Delete/5
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Reviews == null)
@@ -146,6 +151,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Reviews == null)

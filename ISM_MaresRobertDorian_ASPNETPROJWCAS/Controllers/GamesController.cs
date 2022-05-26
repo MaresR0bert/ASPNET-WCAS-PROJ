@@ -48,6 +48,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         }
 
         // GET: Games/Create
+        [Authorize(Roles = "ADMIN_ROLE")]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +59,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Create([Bind("Id,Name,Publisher,GameSize,ImgString,ReleaseDate")] Game game)
         {
             if (ModelState.IsValid)
@@ -70,6 +72,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         }
 
         // GET: Games/Edit/5
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Games == null)
@@ -90,6 +93,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Publisher,GameSize,ImgString,ReleaseDate")] Game game)
         {
             if (id != game.Id)
@@ -121,6 +125,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         }
 
         // GET: Games/Delete/5
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Games == null)
@@ -141,6 +146,7 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Controllers
         // POST: Games/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN_ROLE")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Games == null)
