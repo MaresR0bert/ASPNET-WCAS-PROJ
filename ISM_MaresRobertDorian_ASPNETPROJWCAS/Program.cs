@@ -21,6 +21,16 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -52,6 +62,16 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS
             Task.Run(async () =>
             {
                 await SeedDataIdentity.EnsurePopulatedAsync(app);
+            }).Wait();
+
+            Task.Run(async () =>
+            {
+                await ReviewUserSeed.EnsurePopulatedAsync(app);
+            }).Wait();
+
+            Task.Run(async () =>
+            {
+                await NoRoleUserSeed.EnsurePopulatedAsync(app);
             }).Wait();
 
             app.Run();
