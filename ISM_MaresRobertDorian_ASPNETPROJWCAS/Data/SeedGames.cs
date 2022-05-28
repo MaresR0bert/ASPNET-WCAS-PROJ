@@ -1,4 +1,5 @@
 ﻿using ISM_MaresRobertDorian_ASPNETPROJWCAS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Data
 {
@@ -9,6 +10,11 @@ namespace ISM_MaresRobertDorian_ASPNETPROJWCAS.Data
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+
+                if (context.Database.GetPendingMigrations().Any())
+                {
+                    context.Database.Migrate();
+                }
 
                 if (context != null && !context.Games.Any())
                 {
